@@ -2,14 +2,29 @@ const Register = require('../models/RegisterModel');
 
 exports.index = (req, res) => {
     res.render('register');
-    return 
+    return
 }
 
-exports.register = (req, res) => {
-    const register = new Register(req.body);
+exports.register = async function (req, res) {
+    try {
+        const register = new Register(req.body);
+        await register.register();
 
-    //if(register.errors.length > 0) 
-    register.register();
+        if (register.errors.length > 0) {
+            req.flash('errors', register.errors);
+            req.session.save(function () {
+                return res.redirect('back');
+            });
+            return;
+        }
 
-    res.send(register.errors);
-}
+        req.flash('success', 'Seu usuário foi criado com sucesso.');
+        req.session.save(function () {
+            return res.redirect('back');
+        });
+
+    } catch (err) {
+        console.log(err);
+        return res.render('404');
+    }
+};

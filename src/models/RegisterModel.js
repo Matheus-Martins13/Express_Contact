@@ -3,7 +3,7 @@ const validator = require('validator');
 
 const RegisterSchema = new mongoose.Schema({
     email: { type: String, required: true },
-    senha: { type: String, required: true },
+    password: { type: String, required: true },
 });
 
 const RegisterModel = mongoose.model('Register', RegisterSchema);
@@ -15,13 +15,15 @@ class Register {
         this.user = null;
     }
 
-    falar(){
-        return this.body.email.length;
-    }
-
-    register() {
+    async register() {
         this.valida();
         if(this.errors.length > 0) return;
+
+        try {
+            this.user = await RegisterModel.create(this.body)
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     valida() {
