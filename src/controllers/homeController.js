@@ -1,4 +1,4 @@
 exports.index = (req, res) => {
-    res.render('index');
-    return 
+    if(!req.session.user) return res.render('login');
+    return res.render('index');
 }
