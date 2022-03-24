@@ -53,7 +53,7 @@ class Login {
     }
 
     validateRegister() {
-        if(!this.checkPassword()) return;
+        if (!this.checkPassword()) return;
         this.clearUp();
 
         // email válido 
@@ -71,28 +71,28 @@ class Login {
     }
 
     checkPassword() {
-    if (this.body.password !== this.body.password2) {
-        this.errors.push('As senhas não são iguais.');
-        return false;
-    } else {
-        return true;
-    }
-}
-
-clearUp() {
-    for (let key in this.body) {
-        if (typeof this.body[key] !== 'string') {
-            this.body[key] == '';
+        if (this.body.password !== this.body.password2) {
+            this.errors.push('As senhas não são iguais.');
+            return false;
+        } else {
+            return true;
         }
     }
 
-    this.body = {
-        firstName: this.body.firstName,
-        lastName: this.body.lastName,
-        email: this.body.email,
-        password: this.body.password,
+    clearUp() {
+        for (let key in this.body) {
+            if (typeof this.body[key] !== 'string') {
+                this.body[key] == '';
+            }
+        }
+
+        this.body = {
+            firstName: this.body.firstName,
+            lastName: this.body.lastName,
+            email: this.body.email,
+            password: this.body.password,
+        }
     }
-}
 }
 
 module.exports = Login;
