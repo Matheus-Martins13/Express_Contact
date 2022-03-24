@@ -10,21 +10,22 @@ exports.register = async function (req, res) {
         const register = new Register(req.body);
         await register.register();
 
-        if (register.errors.length > 0) {
+        if(register.errors.length > 0) {
             req.flash('errors', register.errors);
-            req.session.save(function () {
+
+            req.session.save(function() {
                 return res.redirect('back');
             });
-            return;
+            return
         }
 
-        req.flash('success', 'Seu usuário foi criado com sucesso.');
-        req.session.save(function () {
+        req.flash('success', 'Usuário criado com sucesso!');
+        req.session.save(function() {
             return res.redirect('back');
         });
 
-    } catch (err) {
+    } catch(err) {
         console.log(err);
-        return res.render('404');
+        res.render('404');
     }
 };
