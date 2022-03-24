@@ -1,5 +1,5 @@
 <%- include('includes/head') %>
-    <%- include('includes/nav') %>
+<%- include('includes/nav') %>
 
         <div class="container">
             <div class="row">
@@ -9,9 +9,11 @@
                     <h1 class="text-center">Login</h1>
                     <p class="text-center lead"> Se você já tem uma conta, faça login abaixo </p>
 
+                    <%- include('./includes/messages') %>
+
                     <div class="row">
                         <div class="col-lg">
-                            <form action="/register/index" method="POST">
+                            <form action="/login/login" method="post">
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <div class="form-group">
                                     <label>Seu email</label>

@@ -1,4 +1,4 @@
-const Register = require('../models/RegisterModel');
+const Login = require('../models/LoginModel');
 
 exports.index = (req, res) => {
     res.render('register');
@@ -7,7 +7,7 @@ exports.index = (req, res) => {
 
 exports.register = async function (req, res) {
     try {
-        const register = new Register(req.body);
+        const register = new Login(req.body);
         await register.register();
 
         if(register.errors.length > 0) {
