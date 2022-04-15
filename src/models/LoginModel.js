@@ -82,7 +82,7 @@ class Login {
     clearUp() {
         for (let key in this.body) {
             if (typeof this.body[key] !== 'string') {
-                this.body[key] == '';
+                this.body[key] = '';
             }
         }
 
